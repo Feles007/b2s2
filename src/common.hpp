@@ -9,6 +9,7 @@
 #define FATAL_ERROR(...)          \
 	do {                          \
 		std::printf(__VA_ARGS__); \
+		std::putchar('\n');       \
 		std::exit(1);             \
 	} while (0)
 

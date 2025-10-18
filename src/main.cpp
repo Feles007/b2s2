@@ -2,11 +2,15 @@
 
 #include "common.hpp"
 #include <GLFW/glfw3.h>
-#include <cstdio>
-#include <cstdlib>
 
 void error_callback(int error_code, const char *description) {
-	FATAL_ERROR("OpenGL Error %d - %s\n", error_code, description);
+	// What if glfwTerminate has an error?
+	static bool has_been_called = false;
+	if (!has_been_called) {
+		glfwTerminate();
+		has_been_called = true;
+	}
+	FATAL_ERROR("OpenGL Error %d - %s", error_code, description);
 }
 
 int main() {
@@ -20,4 +24,9 @@ int main() {
 
 	GLFWwindow *window = glfwCreateWindow(800, 600, "Here's some text", nullptr, nullptr);
 	xassert(window);
+	glfwMakeContextCurrent(window);
+
+	if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
+		FATAL_ERROR("Failed to initialized GLAD");
+	}
 }
