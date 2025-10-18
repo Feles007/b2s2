@@ -13,7 +13,15 @@ void error_callback(int error_code, const char *description) {
 	FATAL_ERROR("OpenGL Error %d - %s", error_code, description);
 }
 
+void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
+	glViewport(0, 0, width, height);
+}
+
 int main() {
+
+	const int width  = 800;
+	const int height = 600;
+
 	glfwSetErrorCallback(error_callback);
 
 	glfwInit();
@@ -22,11 +30,21 @@ int main() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	GLFWwindow *window = glfwCreateWindow(800, 600, "Here's some text", nullptr, nullptr);
+	GLFWwindow *window = glfwCreateWindow(width, height, "Here's some text", nullptr, nullptr);
 	xassert(window);
 	glfwMakeContextCurrent(window);
 
 	if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
 		FATAL_ERROR("Failed to initialized GLAD");
 	}
+
+	glViewport(0, 0, width, height);
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+	while (!glfwWindowShouldClose(window)) {
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
+
+	glfwTerminate();
 }
