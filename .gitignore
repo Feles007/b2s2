@@ -1,2 +1,4 @@
 buildDir
 .idea
+subprojects/*
+!subprojects/*.wrap
