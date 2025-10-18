@@ -1,4 +1,6 @@
 buildDir
 .idea
+
 subprojects/*
 !subprojects/*.wrap
+!subprojects/glad
