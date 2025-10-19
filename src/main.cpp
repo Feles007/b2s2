@@ -2,6 +2,7 @@
 
 #include "common.hpp"
 #include "file_reader.hpp"
+#include "shader_vertex.hpp"
 #include <GLFW/glfw3.h>
 
 void error_callback(int error_code, const char *description) {
@@ -26,7 +27,6 @@ void process_input(GLFWwindow *window) {
 }
 
 int main() {
-
 	const int width  = 800;
 	const int height = 600;
 
