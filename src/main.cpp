@@ -13,7 +13,7 @@ void error_callback(int error_code, const char *description) {
 	FATAL_ERROR("OpenGL Error %d - %s", error_code, description);
 }
 
-void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
+void framebuffer_size_callback([[maybe_unused]] GLFWwindow *window, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 
@@ -50,7 +50,7 @@ int main() {
 	while (!glfwWindowShouldClose(window)) {
 		process_input(window);
 
-		glClearColor(.2, .3, .3, 1);
+		glClearColor(.2f, .3f, .3f, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glfwSwapBuffers(window);
