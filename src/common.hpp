@@ -30,4 +30,8 @@ using i32   = std::int32_t;
 using i64   = std::int64_t;
 using isize = std::ptrdiff_t;
 
+// Ideally null terminated strings shouldn't be
+// used anywhere, but some APIs require them.
+using nt_string = const char *;
+
 #include "allocation.hpp"
