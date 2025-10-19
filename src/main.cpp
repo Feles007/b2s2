@@ -9,6 +9,7 @@ void error_callback(int error_code, const char *description) {
 	if (!has_been_called) {
 		glfwTerminate();
 		has_been_called = true;
+		std::puts("glfwTerminate had an error");
 	}
 	FATAL_ERROR("OpenGL Error %d - %s", error_code, description);
 }
