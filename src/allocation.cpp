@@ -7,5 +7,5 @@ void *allocate(Layout layout) {
 }
 void deallocate(void *p, [[maybe_unused]] Layout layout) {
 	if (p) _aligned_free(p);
-	FATAL_ERROR("Null pointer freed");
+	else FATAL_ERROR("Null pointer freed");
 }
