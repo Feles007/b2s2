@@ -34,4 +34,6 @@ using isize = std::ptrdiff_t;
 // used anywhere, but some APIs require them.
 using nt_string = const char *;
 
+void check_errno();
+
 #include "allocation.hpp"

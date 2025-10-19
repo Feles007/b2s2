@@ -8,6 +8,7 @@ add_project_arguments('-D_CRT_SECURE_NO_WARNINGS', language : ['c', 'cpp'])
 executable('b2s2',
 
 		   'src/main.cpp',
+		   'src/common.cpp',
 		   'src/allocation.cpp',
 		   'src/file_reader.cpp',
 
