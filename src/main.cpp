@@ -1,8 +1,7 @@
 #include <glad/glad.h>
 
 #include "common.hpp"
-#include "file_reader.hpp"
-#include "shader_vertex.hpp"
+#include "shader_gen.hpp"
 #include <GLFW/glfw3.h>
 
 void error_callback(int error_code, const char *description) {
@@ -51,14 +50,11 @@ int main() {
 
 	float vertices[] = {-0.5, -0.5, 0.0, 0.5, -0.5, 0.0, 0.0, 0.5, 0.0};
 
-	unsigned vbo;
+	u32 vbo;
 	glGenBuffers(1, &vbo);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	const auto vertex_shader_src = FileData::read_file("src/shaders/vertex.glsl");
-	FileData::deallocate(vertex_shader_src);
 
 	while (!glfwWindowShouldClose(window)) {
 		process_input(window);
