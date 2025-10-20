@@ -1,6 +1,7 @@
 #include <glad/glad.h>
 
 #include "common.hpp"
+#include "shader.hpp"
 #include "shader_gen.hpp"
 #include <GLFW/glfw3.h>
 
@@ -55,6 +56,11 @@ int main() {
 
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	const auto shader_v = VertexShader::compile(shader::vertex_src);
+	const auto shader_f = FragmentShader::compile(shader::fragment_src);
+
+	const auto shader_program = ShaderProgram::create(shader_v, shader_f);
 
 	while (!glfwWindowShouldClose(window)) {
 		process_input(window);

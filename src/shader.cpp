@@ -13,7 +13,6 @@ u32 build_shader(GLenum shader_type, nt_string source) {
 
 	if (status) return shader;
 
-	// Error case
 	i32 log_size;
 	glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &log_size);
 
@@ -30,4 +29,28 @@ VertexShader VertexShader::compile(nt_string source) {
 }
 FragmentShader FragmentShader::compile(nt_string source) {
 	return {.gl_handle = build_shader(GL_FRAGMENT_SHADER, source)};
+}
+ShaderProgram ShaderProgram::create(VertexShader vertex_shader, FragmentShader fragment_shader) {
+	u32 shader_program = glCreateProgram();
+	glAttachShader(shader_program, vertex_shader.gl_handle);
+	glAttachShader(shader_program, fragment_shader.gl_handle);
+	glLinkProgram(shader_program);
+
+	i32 status;
+	glGetProgramiv(shader_program, GL_LINK_STATUS, &status);
+
+	if (status) return {.gl_handle = shader_program};
+
+	i32 log_size;
+	glGetProgramiv(shader_program, GL_INFO_LOG_LENGTH, &log_size);
+
+	auto log_buffer = allocate_array<char>(log_size);
+	glGetShaderInfoLog(shader_program, log_size, nullptr, log_buffer);
+
+	FATAL_ERROR_DEFER_EXIT("Error building shader program - %s", log_buffer);
+	deallocate_array(log_buffer, log_size);
+	EXIT();
+}
+void ShaderProgram::use() {
+	glUseProgram(gl_handle);
 }

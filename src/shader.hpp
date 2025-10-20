@@ -13,3 +13,9 @@ struct FragmentShader {
 
 	static FragmentShader compile(nt_string source);
 };
+struct ShaderProgram {
+	u32 gl_handle;
+
+	static ShaderProgram create(VertexShader vertex_shader, FragmentShader fragment_shader);
+	void use();
+};
