@@ -8,12 +8,24 @@
 #define STRINGIFY(x)       STRINGIFY_INNER(x)
 #define STRINGIFY_INNER(x) #x
 
+#define EXIT() std::exit(1)
+
 #define FATAL_ERROR(...)          \
 	do {                          \
 		std::printf(__VA_ARGS__); \
 		std::putchar('\n');       \
-		std::exit(1);             \
+		EXIT();                   \
 	} while (0)
+
+#define FATAL_ERROR_DEFER_EXIT(...) \
+	do {                            \
+		std::printf(__VA_ARGS__);   \
+		std::putchar('\n');         \
+	} while (0)
+
+#define TODO() FATAL_ERROR("TODO at " __FILE__ ":" STRINGIFY(__LINE__))
+
+#define UNREACHABLE() FATAL_ERROR("Entered unreachable code at " __FILE__ ":" STRINGIFY(__LINE__))
 
 #define xassert(expression) \
 	if (!(expression)) FATAL_ERROR("Assert failed at " __FILE__ ":" STRINGIFY(__LINE__) " - xassert(" #expression ")")
