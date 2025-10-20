@@ -25,7 +25,7 @@ u32 build_shader(GLenum shader_type, nt_string source) {
 }
 ShaderProgram ShaderProgram::create(nt_string vertex_shader_source, nt_string fragment_shader_source) {
 	const auto vertex_shader   = build_shader(GL_VERTEX_SHADER, vertex_shader_source);
-	const auto fragment_shader = build_shader(GL_FRAGMENT_SHADER, vertex_shader_source);
+	const auto fragment_shader = build_shader(GL_FRAGMENT_SHADER, fragment_shader_source);
 
 	const auto shader_program = glCreateProgram();
 	glAttachShader(shader_program, vertex_shader);
