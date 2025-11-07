@@ -17,6 +17,8 @@ dependencies = [
 	subproject('glad').get_variable('glad'),
 	# glfw
 	dependency('glfw3', static : true),
+	# cmft
+	subproject('cmft').get_variable('cmft'),
 ]
 
 python = find_program('python3', 'python')
