@@ -1,6 +1,6 @@
 #pragma once
 
-#include "common.hpp"
+#include <cmft/core.hpp>
 
 struct ShaderProgram {
 	u32 gl_handle;

@@ -2,9 +2,6 @@ project('b2s2', 'cpp', default_options : ['warning_level=3', 'cpp_std=c++20'])
 
 cpp_sources = [
 	'src/main.cpp',
-	'src/common.cpp',
-	'src/allocation.cpp',
-	'src/file_reader.cpp',
 	'src/shader.cpp',
 ]
 shader_sources = [

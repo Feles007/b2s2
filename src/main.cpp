@@ -1,9 +1,10 @@
 #include <glad/glad.h>
 
-#include "common.hpp"
+#include "cmft/error.hpp"
 #include "shader.hpp"
 #include "shader_gen.hpp"
 #include <GLFW/glfw3.h>
+#include <cstdio>
 
 void error_callback(int error_code, const char *description) {
 	// What if glfwTerminate has an error?

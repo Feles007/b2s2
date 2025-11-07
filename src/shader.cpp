@@ -1,6 +1,7 @@
 #include "shader.hpp"
-#include "allocation.hpp"
-#include "common.hpp"
+#include <cmft/allocation.hpp>
+#include <cmft/core.hpp>
+#include <cmft/error.hpp>
 #include <glad/glad.h>
 
 u32 build_shader(GLenum shader_type, nt_string source) {

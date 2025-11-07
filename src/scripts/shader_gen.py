@@ -16,7 +16,7 @@ for shader_path in shader_paths:
 
 # Null terminated for C style APIs, but also with a size variable for slice style APIs
 with open(output_path, "w") as f:
-	f.write("#include \"common.hpp\"\n")
+	f.write("#include <cmft/core.hpp>\n")
 	f.write("namespace shader {\n")
 
 	for shader_name, shader_code in shader_sources:

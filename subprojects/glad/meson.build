@@ -2,6 +2,6 @@ project('glad', 'c')
 
 inc = include_directories('include')
 
-lib = library('glad', 'src/glad.c', include_directories : inc)
+lib = static_library('glad', 'src/glad.c', include_directories : inc)
 
 glad = declare_dependency(include_directories : inc, link_with : lib)
