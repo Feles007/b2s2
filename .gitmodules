@@ -1,0 +1,3 @@
+[submodule "subprojects/cmft"]
+	path = subprojects/cmft
+	url = https://github.com/Feles007/cmft.git
