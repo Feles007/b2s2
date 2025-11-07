@@ -27,6 +27,11 @@ void process_input(GLFWwindow *window) {
 }
 
 int main() {
+
+	//
+	// SETUP
+	//
+
 	const int width  = 800;
 	const int height = 600;
 
@@ -49,21 +54,41 @@ int main() {
 	glViewport(0, 0, width, height);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
+	//
+	// Buffers
+	//
+
 	float vertices[] = {-0.5, -0.5, 0.0, 0.5, -0.5, 0.0, 0.0, 0.5, 0.0};
 
-	u32 vbo;
+	u32 vbo, vao;
 	glGenBuffers(1, &vbo);
+	glGenVertexArrays(1, &vao);
 
+	glBindVertexArray(vao);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+	glEnableVertexAttribArray(0);
+
+	//
+	// Shaders
+	//
 
 	const auto shader_program = ShaderProgram::create(shader::vertex_src, shader::fragment_src);
+
+	//
+	// Main loop
+	//
 
 	while (!glfwWindowShouldClose(window)) {
 		process_input(window);
 
 		glClearColor(.2f, .3f, .3f, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		shader_program.use();
+		glBindVertexArray(vao);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
