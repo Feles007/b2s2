@@ -1,0 +1,4 @@
+[wrap-git]
+directory = cmft
+url = https://github.com/Feles007/cmft
+revision = main
