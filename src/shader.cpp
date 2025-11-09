@@ -1,5 +1,5 @@
 #include "shader.hpp"
-#include <cmft/allocation.hpp>
+#include <cmft/heap_array.hpp>
 #include <cmft/core.hpp>
 #include <cmft/error.hpp>
 #include <glad/glad.h>
@@ -17,11 +17,11 @@ u32 build_shader(GLenum shader_type, nt_string source) {
 	i32 log_size;
 	glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &log_size);
 
-	const auto log_buffer = allocate_array<char>(log_size);
-	glGetShaderInfoLog(shader, log_size, nullptr, log_buffer);
+	auto log_buffer = HeapArray<char>(log_size);
+	glGetShaderInfoLog(shader, log_size, nullptr, log_buffer.data());
 
-	FATAL_ERROR_DEFER_EXIT("Error compiling shader - %s", log_buffer);
-	deallocate_array(log_buffer, log_size);
+	FATAL_ERROR_DEFER_EXIT("Error compiling shader - %s", log_buffer.data());
+	log_buffer.deallocate();
 	EXIT();
 }
 ShaderProgram ShaderProgram::create(nt_string vertex_shader_source, nt_string fragment_shader_source) {
@@ -44,11 +44,11 @@ ShaderProgram ShaderProgram::create(nt_string vertex_shader_source, nt_string fr
 	i32 log_size;
 	glGetProgramiv(shader_program, GL_INFO_LOG_LENGTH, &log_size);
 
-	const auto log_buffer = allocate_array<char>(log_size);
-	glGetShaderInfoLog(shader_program, log_size, nullptr, log_buffer);
+	 auto log_buffer = HeapArray<char>(log_size);
+	glGetShaderInfoLog(shader_program, log_size, nullptr, log_buffer.data());
 
-	FATAL_ERROR_DEFER_EXIT("Error building shader program - %s", log_buffer);
-	deallocate_array(log_buffer, log_size);
+	FATAL_ERROR_DEFER_EXIT("Error building shader program - %s", log_buffer.data());
+	log_buffer.deallocate();
 	EXIT();
 }
 void ShaderProgram::use() const {

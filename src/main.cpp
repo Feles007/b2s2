@@ -1,9 +1,9 @@
 #include <glad/glad.h>
 
-#include "cmft/error.hpp"
 #include "shader.hpp"
 #include "shader_gen.hpp"
 #include <GLFW/glfw3.h>
+#include <cmft/error.hpp>
 #include <cstdio>
 
 void error_callback(int error_code, const char *description) {
